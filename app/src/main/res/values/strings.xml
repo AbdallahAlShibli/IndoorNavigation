@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Indoor Navigation</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="search">Search</string>
+    <string name="you_can_search_by_name_coordinates_or_office_no">You can search by office No</string>
+    <string name="about">About</string>
+</resources>

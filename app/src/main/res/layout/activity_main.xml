@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="20dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/squ_logo" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/map"
+                    android:layout_width="170dp"
+                    android:layout_height="125dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/view_map" />
+
+                <Button
+                    android:id="@+id/qr_code"
+                    android:layout_width="170dp"
+                    android:layout_height="125dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/scan" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/search"
+                    android:layout_width="170dp"
+                    android:layout_height="125dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/search_button" />
+
+                <Button
+                    android:id="@+id/about"
+                    android:layout_width="170dp"
+                    android:layout_height="125dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/about_app" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
