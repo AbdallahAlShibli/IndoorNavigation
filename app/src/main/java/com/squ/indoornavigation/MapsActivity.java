@@ -107,7 +107,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        mapOptions.zOrderOnTop(true);
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
         enginneringCollege = new LatLng(23.591966, 58.170859);
 
         Bitmap bitmap12 = BitmapFactory.decodeResource(getResources(), R.drawable.shadow);
@@ -161,6 +160,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         searchMethod();//search method
 
         getMyCurrentLocation(googleMap);//get my current location
+
+        qrMethod();//find office path
     }
 
 
@@ -174,6 +175,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     fetchLocation();
                 }
                 break;
+        }
+    }
+
+    private void qrMethod() {
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            if ((extras.getInt("QRData") == 1) || (extras.getInt("QRData") == 2001)) {
+                PositionsModel positionsModel = new PositionsModel(mMap);
+                positionsModel.get_2001();
+            }else {
+                getSearchMessage();
+            }
+
+            if ((extras.getInt("QRData") == 65)) {
+                PositionsModel positionsModel = new PositionsModel(mMap);
+                positionsModel.get_65();
+            }else {
+                getSearchMessage();
+            }
         }
     }
 
