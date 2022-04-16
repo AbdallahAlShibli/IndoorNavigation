@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.PointF;
 import android.os.Bundle;
@@ -16,7 +17,9 @@ import android.widget.TextView;
 
 import com.dlazaro66.qrcodereaderview.QRCodeReaderView;
 import com.google.android.material.snackbar.Snackbar;
+import com.squ.indoornavigation.MapsActivity;
 import com.squ.indoornavigation.R;
+import com.squ.indoornavigation.SearchActivity;
 
 
 public class QRCodeActivity extends AppCompatActivity
@@ -83,8 +86,20 @@ public class QRCodeActivity extends AppCompatActivity
     // "text" : the text encoded in QR
     // "points" : points where QR control points are placed
     @Override public void onQRCodeRead(String text, PointF[] points) {
-        resultTextView.setText(text);
+
+        if (!text.trim().isEmpty()) {
+
+            int office = Integer.parseInt(text.trim());
+
+            resultTextView.setText("Office :" + office);
+
+            Intent intent = new Intent(QRCodeActivity.this, MapsActivity.class);
+            intent.putExtra("QRData", office);
+            startActivity(intent);
+        }
+
         pointsOverlayView.setPoints(points);
+
     }
 
     private void requestCameraPermission() {

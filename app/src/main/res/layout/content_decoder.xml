@@ -38,7 +38,7 @@
         android:background="#99000000"
         android:checked="false"
         android:padding="16dp"
-        android:text="On/Off flashlight"
+        android:text="@string/on_off_flashlight"
         android:textColor="#ffffff"
         android:textSize="14sp" />
 
@@ -50,7 +50,7 @@
         android:background="#99000000"
         android:checked="true"
         android:padding="16dp"
-        android:text="On/Off QR decoding"
+        android:text="@string/on_off_qr_decoding"
         android:textColor="#ffffff"
         android:textSize="14sp" />
 

@@ -4,4 +4,9 @@
     <string name="search">Search</string>
     <string name="you_can_search_by_name_coordinates_or_office_no">You can search by office No</string>
     <string name="about">About</string>
+    <string name="college_of_engineering">College of Engineering</string>
+    <string name="not_found">Not found!</string>
+    <string name="current_location">Current Location</string>
+    <string name="on_off_flashlight">On/Off flashlight</string>
+    <string name="on_off_qr_decoding">On/Off QR decoding</string>
 </resources>

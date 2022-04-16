@@ -14,7 +14,10 @@ import android.location.Location;
 import android.location.LocationRequest;
 import android.opengl.Visibility;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -41,9 +44,10 @@ import com.squ.indoornavigation.databinding.ActivityMapsBinding;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private LatLng sydney;
+    private LatLng enginneringCollege;
     private GoogleMapOptions mapOptions;
     private ActivityMapsBinding binding;
+    private Switch switchBox;
 
     Location currentLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
@@ -52,6 +56,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
 
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -78,8 +84,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     // Obtain the SupportMapFragment and get notified when the map is ready to be used.
                     SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                             .findFragmentById(R.id.map);
+                    switchBox = findViewById(R.id.switchMyLocation);
                     mapFragment.getMapAsync(MapsActivity.this);
-                    Toast.makeText(getApplicationContext(), currentLocation.getLatitude() + "" + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(), currentLocation.getLatitude() + "" + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -101,54 +108,59 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        sydney = new LatLng(23.591966, 58.170859);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 18));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(18), 100, null);
+        enginneringCollege = new LatLng(23.591966, 58.170859);
+
+        Bitmap bitmap12 = BitmapFactory.decodeResource(getResources(), R.drawable.shadow);
+        BitmapDescriptor bitmapDescriptor12 = BitmapDescriptorFactory.fromBitmap(bitmap12);
+
+        mMap.addMarker(new MarkerOptions().position(enginneringCollege).title(getString(R.string.college_of_engineering)).icon(bitmapDescriptor12));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(enginneringCollege, 19));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(19), 100, null);
         mMap.getUiSettings().setMapToolbarEnabled(false);
         mMap.setMapType(mMap.MAP_TYPE_SATELLITE);
 //        mMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
 //            @Override
 //            public void onCameraIdle() {
-//                sydney = new LatLng(mMap.getCameraPosition().target.latitude, mMap.getCameraPosition().target.longitude);
+//                enginneringCollege = new LatLng(mMap.getCameraPosition().target.latitude, mMap.getCameraPosition().target.longitude);
 //                VisibleRegion visibleRegion = mMap.getProjection().getVisibleRegion();
 //                LatLng topLeft = visibleRegion.farLeft;
 //                LatLng bottomLeft = visibleRegion.nearLeft;
 //                LatLng topRight = visibleRegion.farRight;
 //                LatLng bottomRight = visibleRegion.nearRight;
-//                LatLngBounds latLngBounds = new LatLngBounds.Builder().include(sydney).include(topLeft).include(topRight).include(bottomLeft).include(bottomRight).build();
+//                LatLngBounds latLngBounds = new LatLngBounds.Builder().include(enginneringCollege).include(topLeft).include(topRight).include(bottomLeft).include(bottomRight).build();
 //                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.map_background);
 //                float degrees = 30;
 //                Matrix matrix = new Matrix();
 //                matrix.setRotate(degrees);
 //                Bitmap bitmap0 = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 //                BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmap);
-//                GroundOverlayOptions groundOverlayOptions = new GroundOverlayOptions().image(bitmapDescriptor).position(sydney,bitmap.getWidth(), bitmap.getHeight()).transparency(0.7f);
+//                GroundOverlayOptions groundOverlayOptions = new GroundOverlayOptions().image(bitmapDescriptor).position(enginneringCollege,bitmap.getWidth(), bitmap.getHeight()).transparency(0.7f);
 //                mMap.addGroundOverlay(groundOverlayOptions);
 //
 //            }
 //        });
 
 
-        sydney = new LatLng(mMap.getCameraPosition().target.latitude, mMap.getCameraPosition().target.longitude);
+        enginneringCollege = new LatLng(mMap.getCameraPosition().target.latitude, mMap.getCameraPosition().target.longitude);
         VisibleRegion visibleRegion = mMap.getProjection().getVisibleRegion();
         LatLng topLeft = visibleRegion.farLeft;
         LatLng bottomLeft = visibleRegion.nearLeft;
         LatLng topRight = visibleRegion.farRight;
         LatLng bottomRight = visibleRegion.nearRight;
-        LatLngBounds latLngBounds = new LatLngBounds.Builder().include(sydney).include(topLeft).include(topRight).include(bottomLeft).include(bottomRight).build();
+        LatLngBounds latLngBounds = new LatLngBounds.Builder().include(enginneringCollege).include(topLeft).include(topRight).include(bottomLeft).include(bottomRight).build();
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.map_background);
         float degrees = -3;
         Matrix matrix = new Matrix();
         matrix.setRotate(degrees);
         Bitmap bitmap0 = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
         BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmap0);
-        GroundOverlayOptions groundOverlayOptions = new GroundOverlayOptions().image(bitmapDescriptor).position(sydney,100f, 50f).transparency(0.1f);
+        GroundOverlayOptions groundOverlayOptions = new GroundOverlayOptions().image(bitmapDescriptor).position(enginneringCollege, 100f, 50f).transparency(0.1f);
         mMap.addGroundOverlay(groundOverlayOptions);
 
 
+        searchMethod();//search method
 
-        getMyCurrentLocation(googleMap);
+        getMyCurrentLocation(googleMap);//get my current location
     }
 
 
@@ -165,17 +177,59 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+
+
+    private void searchMethod() {
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            if ((extras.getInt("searchData") == 1) || (extras.getInt("searchData") == 2001)) {
+                PositionsModel positionsModel = new PositionsModel(mMap);
+                positionsModel.get_2001();
+            }else {
+                getSearchMessage();
+            }
+
+            if ((extras.getInt("searchData") == 65)) {
+                PositionsModel positionsModel = new PositionsModel(mMap);
+                positionsModel.get_65();
+            }else {
+                getSearchMessage();
+            }
+        }
+    }
+
+
+    //search message
+    private void getSearchMessage() {
+        Toast.makeText(MapsActivity.this, R.string.not_found, Toast.LENGTH_SHORT).show();
+    }
+
+
+    //get my location
     private void getMyCurrentLocation(GoogleMap googleMap) {
 
-        double latitude = currentLocation.getLatitude();
-        double longitude = currentLocation.getLongitude();
+        switchBox.setOnClickListener(view -> {
 
-        //get my location
-        LatLng latLng = new LatLng(latitude, longitude);
-        MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("Current Location");
-        googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
-        googleMap.addMarker(markerOptions);
+            boolean switchBoxState = switchBox.isChecked();
+
+            if (switchBoxState) {
+
+
+                double latitude = currentLocation.getLatitude();
+                double longitude = currentLocation.getLongitude();
+
+
+                LatLng latLng = new LatLng(latitude, longitude);
+                MarkerOptions markerOptions = new MarkerOptions().position(latLng).title(getString(R.string.current_location));
+                googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 19));
+                googleMap.addMarker(markerOptions);
+            }
+
+        });
+
     }
+
 
 }

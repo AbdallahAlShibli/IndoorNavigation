@@ -2,6 +2,7 @@ package com.squ.indoornavigation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +26,9 @@ public class SearchActivity extends AppCompatActivity {
             if(searchBox.getText().toString().trim().matches("\\d+")) {
                 int OfficeNo = Integer.parseInt(searchBox.getText().toString().trim());
 
+                Intent intent = new Intent(SearchActivity.this, MapsActivity.class);
+                intent.putExtra("searchData", OfficeNo);
+                startActivity(intent);
 
             }else {
                 Toast.makeText(SearchActivity.this, "Please enter office number as number!.", Toast.LENGTH_SHORT).show();
