@@ -161,7 +161,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         getMyCurrentLocation(googleMap);//get my current location
 
-        qrMethod();//find office path
+        qrMethod();//draw office path
     }
 
 
