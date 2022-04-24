@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dlazaro66.qrcodereaderview.QRCodeReaderView;
 import com.google.android.material.snackbar.Snackbar;
@@ -89,13 +90,21 @@ public class QRCodeActivity extends AppCompatActivity
 
         if (!text.trim().isEmpty()) {
 
-            int office = Integer.parseInt(text.trim());
+//            int office = Integer.parseInt(text.trim());
 
-            resultTextView.setText("Office :" + office);
+            if(text.toString().trim().matches("\\d+")) {
+                int OfficeNo = Integer.parseInt(text.toString().trim());
 
-            Intent intent = new Intent(QRCodeActivity.this, MapsActivity.class);
-            intent.putExtra("QRData", office);
-            startActivity(intent);
+                resultTextView.setText("Office :" + OfficeNo);
+
+                Intent intent = new Intent(QRCodeActivity.this, MapsActivity.class);
+                intent.putExtra("QRData", OfficeNo);
+                startActivity(intent);
+
+            }else {
+                Toast.makeText(QRCodeActivity.this, "Please enter right QR code!.", Toast.LENGTH_SHORT).show();
+            }
+
         }
 
         pointsOverlayView.setPoints(points);

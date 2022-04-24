@@ -29,6 +29,12 @@
             android:textAlignment="center"
             android:text="@string/about" />
 
+        <com.github.barteksc.pdfviewer.PDFView
+            android:id="@+id/pdfv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </com.github.barteksc.pdfviewer.PDFView>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

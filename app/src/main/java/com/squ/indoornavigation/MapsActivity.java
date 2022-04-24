@@ -45,12 +45,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private LatLng enginneringCollege;
-    private GoogleMapOptions mapOptions;
     private ActivityMapsBinding binding;
-    private Switch switchBox;
 
-    Location currentLocation;
-    FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE = 101;
 
     @Override
@@ -62,7 +58,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         fetchLocation();
 
 
@@ -75,22 +70,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
             return;
         }
-        Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        task.addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location != null) {
-                    currentLocation = location;
-                    // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-                    SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                            .findFragmentById(R.id.map);
-                    switchBox = findViewById(R.id.switchMyLocation);
-                    mapFragment.getMapAsync(MapsActivity.this);
-//                    Toast.makeText(getApplicationContext(), currentLocation.getLatitude() + "" + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
 
-                }
-            }
-        });
+        mapFragment.getMapAsync(MapsActivity.this);
     }
 
     /**
@@ -106,7 +90,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
 //        mapOptions.zOrderOnTop(true);
         mMap = googleMap;
-
         enginneringCollege = new LatLng(23.591966, 58.170859);
 
         Bitmap bitmap12 = BitmapFactory.decodeResource(getResources(), R.drawable.shadow);
@@ -117,29 +100,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.animateCamera(CameraUpdateFactory.zoomTo(19), 100, null);
         mMap.getUiSettings().setMapToolbarEnabled(false);
         mMap.setMapType(mMap.MAP_TYPE_SATELLITE);
-//        mMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
-//            @Override
-//            public void onCameraIdle() {
-//                enginneringCollege = new LatLng(mMap.getCameraPosition().target.latitude, mMap.getCameraPosition().target.longitude);
-//                VisibleRegion visibleRegion = mMap.getProjection().getVisibleRegion();
-//                LatLng topLeft = visibleRegion.farLeft;
-//                LatLng bottomLeft = visibleRegion.nearLeft;
-//                LatLng topRight = visibleRegion.farRight;
-//                LatLng bottomRight = visibleRegion.nearRight;
-//                LatLngBounds latLngBounds = new LatLngBounds.Builder().include(enginneringCollege).include(topLeft).include(topRight).include(bottomLeft).include(bottomRight).build();
-//                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.map_background);
-//                float degrees = 30;
-//                Matrix matrix = new Matrix();
-//                matrix.setRotate(degrees);
-//                Bitmap bitmap0 = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-//                BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmap);
-//                GroundOverlayOptions groundOverlayOptions = new GroundOverlayOptions().image(bitmapDescriptor).position(enginneringCollege,bitmap.getWidth(), bitmap.getHeight()).transparency(0.7f);
-//                mMap.addGroundOverlay(groundOverlayOptions);
+////        mMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
+////            @Override
+////            public void onCameraIdle() {
+////                enginneringCollege = new LatLng(mMap.getCameraPosition().target.latitude, mMap.getCameraPosition().target.longitude);
+////                VisibleRegion visibleRegion = mMap.getProjection().getVisibleRegion();
+////                LatLng topLeft = visibleRegion.farLeft;
+////                LatLng bottomLeft = visibleRegion.nearLeft;
+////                LatLng topRight = visibleRegion.farRight;
+////                LatLng bottomRight = visibleRegion.nearRight;
+////                LatLngBounds latLngBounds = new LatLngBounds.Builder().include(enginneringCollege).include(topLeft).include(topRight).include(bottomLeft).include(bottomRight).build();
+////                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.map_background);
+////                float degrees = 30;
+////                Matrix matrix = new Matrix();
+////                matrix.setRotate(degrees);
+////                Bitmap bitmap0 = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+////                BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmap);
+////                GroundOverlayOptions groundOverlayOptions = new GroundOverlayOptions().image(bitmapDescriptor).position(enginneringCollege,bitmap.getWidth(), bitmap.getHeight()).transparency(0.7f);
+////                mMap.addGroundOverlay(groundOverlayOptions);
+////
+////            }
+////        });
 //
-//            }
-//        });
-
-
+//
         enginneringCollege = new LatLng(mMap.getCameraPosition().target.latitude, mMap.getCameraPosition().target.longitude);
         VisibleRegion visibleRegion = mMap.getProjection().getVisibleRegion();
         LatLng topLeft = visibleRegion.farLeft;
@@ -155,12 +138,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmap0);
         GroundOverlayOptions groundOverlayOptions = new GroundOverlayOptions().image(bitmapDescriptor).position(enginneringCollege, 100f, 50f).transparency(0.1f);
         mMap.addGroundOverlay(groundOverlayOptions);
-
-
+//
+//
         searchMethod();//search method
-
-        getMyCurrentLocation(googleMap);//get my current location
-
+//
+////        getMyCurrentLocation(googleMap);//get my current location
+//
         qrMethod();//draw office path
     }
 
@@ -182,18 +165,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            if ((extras.getInt("QRData") == 1) || (extras.getInt("QRData") == 2001)) {
+            if ((extras.getInt("QRData") == 64)) {
                 PositionsModel positionsModel = new PositionsModel(mMap);
-                positionsModel.get_2001();
+                positionsModel.get_64_path();
             }else {
-                getSearchMessage();
+//                getSearchMessage();
             }
 
-            if ((extras.getInt("QRData") == 65)) {
+            if ((extras.getInt("QRData") == 75)) {
                 PositionsModel positionsModel = new PositionsModel(mMap);
-                positionsModel.get_65();
+                positionsModel.get_75_path();
             }else {
-                getSearchMessage();
+//                getSearchMessage();
             }
         }
     }
@@ -208,15 +191,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 PositionsModel positionsModel = new PositionsModel(mMap);
                 positionsModel.get_2001();
             }else {
-                getSearchMessage();
+//                getSearchMessage();
             }
 
             if ((extras.getInt("searchData") == 65)) {
                 PositionsModel positionsModel = new PositionsModel(mMap);
                 positionsModel.get_65();
             }else {
-                getSearchMessage();
+//                getSearchMessage();
             }
+
+            if ((extras.getInt("searchData") == 2002)) {
+                PositionsModel positionsModel = new PositionsModel(mMap);
+                positionsModel.get_2002();
+            }else {
+//                getSearchMessage();
+            }
+
         }
     }
 
@@ -227,30 +218,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    //get my location
-    private void getMyCurrentLocation(GoogleMap googleMap) {
-
-        switchBox.setOnClickListener(view -> {
-
-            boolean switchBoxState = switchBox.isChecked();
-
-            if (switchBoxState) {
-
-
-                double latitude = currentLocation.getLatitude();
-                double longitude = currentLocation.getLongitude();
-
-
-                LatLng latLng = new LatLng(latitude, longitude);
-                MarkerOptions markerOptions = new MarkerOptions().position(latLng).title(getString(R.string.current_location));
-                googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 19));
-                googleMap.addMarker(markerOptions);
-            }
-
-        });
-
-    }
+//    //get my location
+//    private void getMyCurrentLocation(GoogleMap googleMap) {
+//
+//        switchBox.setOnClickListener(view -> {
+//
+//            boolean switchBoxState = switchBox.isChecked();
+//
+//            if (switchBoxState) {
+//
+//
+//                double latitude = currentLocation.getLatitude();
+//                double longitude = currentLocation.getLongitude();
+//
+//
+//                LatLng latLng = new LatLng(latitude, longitude);
+//                MarkerOptions markerOptions = new MarkerOptions().position(latLng).title(getString(R.string.current_location));
+//                googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+//                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 19));
+//                googleMap.addMarker(markerOptions);
+//            }
+//
+//        });
+//
+//    }
 
 
 }
